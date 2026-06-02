@@ -147,6 +147,10 @@ STORAGES = {
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+# Assignment/demo only: serve seeded catalogue images when DEBUG is False.
+# A production site would use object storage (S3, etc.) for uploads.
+SERVE_DEMO_MEDIA = os.environ.get("SERVE_DEMO_MEDIA", "1") == "1"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

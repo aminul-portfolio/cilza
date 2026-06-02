@@ -23,8 +23,31 @@ class Command(BaseCommand):
                 continue
             src = static_img_dir / image_name
             dst = media_cakes_dir / image_name
-            if src.exists() and not dst.exists():
+            if src.exists():
                 shutil.copy2(src, dst)
 
         load_initial_cakes()
+
+        from cakes.models import Cake
+
+        for cake_data in cakes_data:
+            image_rel = cake_data.get("image", "")
+            if not image_rel:
+                continue
+            media_file = media_cakes_dir / Path(image_rel).name
+            if not media_file.exists():
+                continue
+            try:
+                cake = Cake.objects.get(slug=cake_data["slug"])
+            except Cake.DoesNotExist:
+                continue
+            needs_image = not cake.main_image
+            if cake.main_image:
+                try:
+                    needs_image = not Path(cake.main_image.path).exists()
+                except (ValueError, FileNotFoundError):
+                    needs_image = True
+            if needs_image:
+                cake.main_image = image_rel
+                cake.save(update_fields=["main_image"])
         self.stdout.write(self.style.SUCCESS("Demo cake data seed completed."))

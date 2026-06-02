@@ -14,8 +14,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import re
+
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path, re_path
+from django.views.static import serve
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -25,6 +28,18 @@ urlpatterns = [
     path("", include("cakes.urls")),
 ]
 
-# ✅ Serve uploaded images in development
+# Development: Django's static() helper (DEBUG-only in Django 5+).
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Render/demo only: serve seeded catalogue images when DEBUG is False.
+# django.conf.urls.static.static() is a no-op outside DEBUG, so use serve() directly.
+elif getattr(settings, "SERVE_DEMO_MEDIA", False):
+    media_prefix = settings.MEDIA_URL.lstrip("/")
+    urlpatterns += [
+        re_path(
+            rf"^{re.escape(media_prefix)}(?P<path>.*)$",
+            serve,
+            {"document_root": settings.MEDIA_ROOT},
+        ),
+    ]
