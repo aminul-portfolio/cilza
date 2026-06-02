@@ -5,7 +5,7 @@ services:
     plan: free
     rootDir: healthcakes_project
     buildCommand: bash build.sh
-    startCommand: python -m gunicorn healthcakes_project.asgi:application -k uvicorn.workers.UvicornWorker
+    startCommand: "gunicorn healthcakes_project.wsgi:application --bind 0.0.0.0:$PORT"
     envVars:
       - key: SECRET_KEY
         generateValue: true
