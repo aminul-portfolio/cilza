@@ -1,0 +1,118 @@
+{% extends "cakes/base.html" %}
+{% load static %}
+
+{% block title %}Occasions | Cilza Cakes Studio{% endblock %}
+
+{% block content %}
+<section class="page-shell py-4">
+  <div class="container page-container">
+
+    <!-- Intro -->
+    <div class="text-center mb-4">
+      <p class="promise-pretitle">Occasion ready</p>
+      <h1 class="section-title mb-2">Cakes for every kind of day.</h1>
+      <p class="text-muted mb-0 page-intro-text">
+        From first birthdays to quiet Sunday catch-ups, we bake cakes to match
+        the moment - lighter recipes, real ingredients and designs that look
+        beautiful on the table.
+      </p>
+    </div>
+
+    <!-- Occasion cards -->
+    <div class="cake-grid">
+      <!-- Birthday -->
+      <article class="cake-card card h-100">
+        <div class="card-body d-flex flex-column">
+          <p class="fs-3 mb-2">🎂</p>
+          <h2 class="h5 mb-2">Birthday Zone</h2>
+          <p class="small text-muted mb-3">
+            Classic layers, bright colours and room for candles and a message.
+            Ideal for family birthdays and office celebrations.
+          </p>
+          <ul class="small text-muted mb-3">
+            <li>Personalised messages on top.</li>
+            <li>6-10 serving sizes available.</li>
+            <li>Same-day delivery on selected designs.</li>
+          </ul>
+          <div class="mt-auto">
+            <a href="{% url 'cake_list' %}"
+               class="hc-btn-outline text-decoration-none">
+              Browse birthday cakes
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Kids -->
+      <article class="cake-card card h-100">
+        <div class="card-body d-flex flex-column">
+          <p class="fs-3 mb-2">🧸</p>
+          <h2 class="h5 mb-2">Kids Collection</h2>
+          <p class="small text-muted mb-3">
+            Soft sponges and playful finishes that keep little ones excited
+            without overwhelming the party table.
+          </p>
+          <ul class="small text-muted mb-3">
+            <li>Flavours kids actually eat (and finish).</li>
+            <li>Less-sugar options available.</li>
+            <li>Space for names and age numbers.</li>
+          </ul>
+          <div class="mt-auto">
+            <a href="{% url 'cake_list' %}"
+               class="hc-btn-outline text-decoration-none">
+              Explore kids' cakes
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Office / gatherings -->
+      <article class="cake-card card h-100">
+        <div class="card-body d-flex flex-column">
+          <p class="fs-3 mb-2">🏢</p>
+          <h2 class="h5 mb-2">Office &amp; team treats</h2>
+          <p class="small text-muted mb-3">
+            Easy-to-slice cakes and loaves for meetings, Friday wins and
+            “thank you” moments.
+          </p>
+          <ul class="small text-muted mb-3">
+            <li>Loaf cakes ideal for small plates.</li>
+            <li>Balanced sweetness - no sugar crash.</li>
+            <li>Multiple cakes for larger teams.</li>
+          </ul>
+          <div class="mt-auto">
+            <a href="{% url 'cake_list' %}"
+               class="hc-btn-outline text-decoration-none">
+              See sharing cakes
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Wellness / lighter -->
+      <article class="cake-card card h-100">
+        <div class="card-body d-flex flex-column">
+          <p class="fs-3 mb-2">🌿</p>
+          <h2 class="h5 mb-2">Lighter &amp; wellness moments</h2>
+          <p class="small text-muted mb-3">
+            For book clubs, brunches and mindful celebrations where you still
+            want a slice of something special.
+          </p>
+          <ul class="small text-muted mb-3">
+            <li>Matcha, citrus and fruit-forward flavours.</li>
+            <li>Options with less sugar and whole grains.</li>
+            <li>Pairs nicely with tea and coffee.</li>
+          </ul>
+          <div class="mt-auto">
+            <a href="{% url 'cake_list' %}"
+               class="hc-btn-outline text-decoration-none">
+              Discover lighter cakes
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

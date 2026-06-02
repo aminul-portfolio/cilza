@@ -1,0 +1,74 @@
+{% extends "cakes/base.html" %}
+
+{% block title %}Cart | Cilza Cakes Studio{% endblock %}
+
+{% block content %}
+<section class="page-shell py-4">
+  <div class="container page-container">
+    <header class="page-intro text-center mb-4">
+      <p class="promise-pretitle">Your basket</p>
+      <h1 class="section-title mb-2">Cart</h1>
+      <p class="page-intro-text text-muted mb-0">
+        Review your selected cakes before placing an order request.
+      </p>
+    </header>
+
+    <div class="content-card">
+      <div class="table-responsive">
+        <table class="table align-middle mb-3">
+          <thead>
+            <tr>
+              <th scope="col">Item</th>
+              <th scope="col" class="text-center">Qty</th>
+              <th scope="col" class="text-end">Price</th>
+            </tr>
+          </thead>
+          <tbody id="cart-table-body">
+            <tr>
+              <td colspan="3" class="text-muted">Your cart is currently empty.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <p class="mb-0 fw-semibold">Estimated total: <span id="cart-total-amount">£0.00</span></p>
+        <a class="btn hc-btn-primary" href="{% url 'plan_order' %}">Plan an order</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const body = document.getElementById("cart-table-body");
+    const totalEl = document.getElementById("cart-total-amount");
+    if (!body || !totalEl) return;
+
+    let cart = { items: [], totalAmount: 0 };
+    try {
+      cart = JSON.parse(localStorage.getItem("cakeCart")) || cart;
+    } catch (_err) {
+      cart = { items: [], totalAmount: 0 };
+    }
+
+    if (!Array.isArray(cart.items) || !cart.items.length) return;
+
+    body.innerHTML = "";
+    cart.items.forEach((item) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${item.name || "Cake item"}</td>
+        <td class="text-center">${item.qty || 0}</td>
+        <td class="text-end">£${Number((item.price || 0) * (item.qty || 0)).toFixed(2)}</td>
+      `;
+      body.appendChild(row);
+    });
+
+    totalEl.textContent = `£${Number(cart.totalAmount || 0).toFixed(2)}`;
+  });
+</script>
+{% endblock %}

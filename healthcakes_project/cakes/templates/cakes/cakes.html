@@ -1,0 +1,213 @@
+{% extends "cakes/base.html" %}
+{% load static %}
+
+{% block title %}All Cakes | Cilza Cakes Studio{% endblock %}
+
+{% block extra_head %}
+  {# All global styles are already in css/style.css via base.html #}
+{% endblock %}
+
+{% block content %}
+
+<section class="cake-page page-shell py-4">
+  <div class="container page-container">
+
+    {# 1️⃣ INTRO: ALL CAKES SUMMARY #}
+    <section class="cake-category-intro mb-4">
+      <article class="cake-type-card cake-intro-card">
+        <div class="d-flex flex-column flex-md-row align-items-md-center gap-3">
+
+          <div class="flex-shrink-0">
+            <div class="cake-intro-icon">🍰</div>
+          </div>
+
+          <div class="flex-grow-1">
+            <h1 class="cake-intro-heading section-title mb-2">All Cakes</h1>
+
+            <p class="cake-intro-subtitle mb-2">
+              All your favourites in one place - wedding showstoppers, birthday cakes,
+              playful kids' designs and rich chocolate layers.
+            </p>
+
+            <p class="cake-intro-text mb-2">
+              Choose a cake that matches your moment: big parties, quiet tea breaks, office
+              treats or last-minute surprises. We bake with real ingredients, lighter recipes
+              and colours that pop in every photo.
+            </p>
+
+            <ul class="cake-intro-list mb-2">
+              <li>Same-day London delivery on selected cakes (order before 2 PM).</li>
+              <li>Options for less sugar, vegan and nut-free recipes where marked.</li>
+              <li>Custom messages, candles and simple decorations available on request.</li>
+            </ul>
+
+            <p class="cake-intro-note mb-0">
+              Browse every Cilza Cakes Studio design in one grid. Use the category bar below to quickly
+              focus on <strong>Wedding &amp; Anniversary</strong>, <strong>Party cakes</strong>,
+              or collections like <strong>Birthday Zone</strong>, <strong>Kids Collection</strong> and the
+              <strong>Chocolate Collection</strong>.
+            </p>
+          </div>
+
+        </div>
+      </article>
+    </section>
+
+    {# 2️⃣ FILTER RIBBON: Occasion + Collections #}
+    <nav class="cake-category-ribbon mb-4" aria-label="Cake categories">
+      <ul class="nav cake-category-nav flex-wrap">
+
+        {# All #}
+        <li class="nav-item mb-2 me-2">
+          <a
+            class="nav-link cake-category-pill {% if not active_category or active_category == 'all' %}is-active active{% endif %}"
+            href="{% url 'cake_list' %}{% if search_query %}?q={{ search_query|urlencode }}{% endif %}"
+          >
+            All Cakes
+          </a>
+        </li>
+
+        {# Occasion types (Cake.occasion_type) #}
+        <li class="nav-item mb-2 me-2">
+          <a
+            class="nav-link cake-category-pill {% if active_category == 'wedding' %}is-active active{% endif %}"
+            href="{% url 'cake_list' %}?category=wedding{% if search_query %}&q={{ search_query|urlencode }}{% endif %}"
+          >
+            💍 Wedding
+          </a>
+        </li>
+        <li class="nav-item mb-2 me-2">
+          <a
+            class="nav-link cake-category-pill {% if active_category == 'anniversary' %}is-active active{% endif %}"
+            href="{% url 'cake_list' %}?category=anniversary{% if search_query %}&q={{ search_query|urlencode }}{% endif %}"
+          >
+            💞 Anniversary
+          </a>
+        </li>
+        <li class="nav-item mb-2 me-2">
+          <a
+            class="nav-link cake-category-pill {% if active_category == 'party' %}is-active active{% endif %}"
+            href="{% url 'cake_list' %}?category=party{% if search_query %}&q={{ search_query|urlencode }}{% endif %}"
+          >
+            🎉 Party
+          </a>
+        </li>
+        <li class="nav-item mb-2 me-2">
+          <a
+            class="nav-link cake-category-pill {% if active_category == 'other' %}is-active active{% endif %}"
+            href="{% url 'cake_list' %}?category=other{% if search_query %}&q={{ search_query|urlencode }}{% endif %}"
+          >
+            ☕ Everyday / Other
+          </a>
+        </li>
+
+        {# Collections from DB (🎂 / 🧸 / 🍫 etc.) #}
+        {% for col in collections %}
+          <li class="nav-item mb-2 me-2">
+            <a
+              class="nav-link cake-category-pill {% if active_category == col.key %}is-active active{% endif %}"
+              href="{% url 'cake_list' %}?category={{ col.key|urlencode }}{% if search_query %}&q={{ search_query|urlencode }}{% endif %}"
+            >
+              {% if col.icon %}{{ col.icon }} {% endif %}{{ col.label }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <section class="cake-search-shell mb-4" aria-label="Cake search">
+      <form method="get" class="cake-search-form" role="search">
+        <label for="cake-search-input" class="cake-search-label">Search cakes</label>
+        <div class="cake-search-controls">
+          <input
+            id="cake-search-input"
+            type="search"
+            name="q"
+            class="form-control form-control-premium"
+            value="{{ search_query }}"
+            placeholder="Search by cake name, flavour, or occasion"
+          >
+          {% if active_category and active_category != "all" %}
+            <input type="hidden" name="category" value="{{ active_category }}">
+          {% endif %}
+          <button type="submit" class="btn hc-btn-primary">Search</button>
+          {% if search_query %}
+            <a
+              href="{% url 'cake_list' %}{% if active_category and active_category != 'all' %}?category={{ active_category|urlencode }}{% endif %}"
+              class="btn btn-outline-secondary"
+            >
+              Clear
+            </a>
+          {% endif %}
+        </div>
+      </form>
+    </section>
+
+    {# 3️⃣ ALL CAKES GRID #}
+    <section class="mb-5">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="section-title mb-0">Browse all cakes</h2>
+        <span class="text-muted small">
+          {% if search_query %}
+            Showing results for "{{ search_query }}" - {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ total_results }} cakes
+          {% else %}
+            Showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ total_results }} cakes
+          {% endif %}
+        </span>
+      </div>
+
+      <div class="cake-grid cake-grid-portfolio">
+
+        {% if cakes %}
+          {% for cake in cakes %}
+            {# Shared card partial - same layout as home cards #}
+            {% include "cakes/_cake_card.html" with cake=cake show_description=False show_add_to_cart=True %}
+          {% endfor %}
+        {% else %}
+          <p class="text-muted">
+            {% if search_query %}
+              No cakes found for "{{ search_query }}". Try a different keyword.
+            {% else %}
+              No cakes have been added yet. Please add some in the admin.
+            {% endif %}
+          </p>
+        {% endif %}
+
+      </div>
+
+      {% if page_obj.has_other_pages %}
+        <nav class="cake-pagination mt-4" aria-label="Cake results pagination">
+          {% if page_obj.has_previous %}
+            <a
+              class="btn btn-outline-secondary btn-sm"
+              href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query|urlencode }}{% endif %}{% if active_category and active_category != 'all' %}&category={{ active_category|urlencode }}{% endif %}"
+            >
+              Previous
+            </a>
+          {% else %}
+            <span class="btn btn-outline-secondary btn-sm disabled" aria-disabled="true">Previous</span>
+          {% endif %}
+
+          <span class="cake-pagination-status">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+          </span>
+
+          {% if page_obj.has_next %}
+            <a
+              class="btn btn-outline-secondary btn-sm"
+              href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query|urlencode }}{% endif %}{% if active_category and active_category != 'all' %}&category={{ active_category|urlencode }}{% endif %}"
+            >
+              Next
+            </a>
+          {% else %}
+            <span class="btn btn-outline-secondary btn-sm disabled" aria-disabled="true">Next</span>
+          {% endif %}
+        </nav>
+      {% endif %}
+    </section>
+
+  </div>
+</section>
+
+{% endblock %}
+

@@ -1,0 +1,68 @@
+{% load static %}
+
+<article
+  class="cake-card card"
+  data-category="{{ cake.occasion_type }} {% for col in cake.collections.all %}{{ col.key }} {% endfor %}"
+>
+  <a href="{% url 'cake_detail' slug=cake.slug %}"
+     class="cake-card-link text-decoration-none text-reset">
+    <div class="cake-card-visual">
+      <div class="cake-card-border"></div>
+
+      {% if cake.main_image %}
+        <img src="{{ cake.main_image.url }}"
+             alt="{{ cake.name }}"
+             class="cake-card-img"
+             loading="lazy">
+      {% else %}
+        <img src="{% static 'img/placeholder.jpg' %}"
+             alt="{{ cake.name }}"
+             class="cake-card-img"
+             loading="lazy">
+      {% endif %}
+
+      <div class="cake-card-overlay">
+        <div class="cake-card-overlay-inner">
+          <h3 class="cake-card-overlay-title">{{ cake.name }}</h3>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <div class="cake-card-body card-body">
+    <div class="cake-card-info">
+      <h3 class="cake-card-name h6 mb-1">{{ cake.name }}</h3>
+
+      {% with v=cake.default_variant %}
+        {% if v %}
+          <div class="cake-card-price">
+            From £{{ v.price }}
+          </div>
+        {% else %}
+          <div class="cake-card-price cake-card-price-muted">
+            Price coming soon
+          </div>
+        {% endif %}
+      {% endwith %}
+    </div>
+
+    <div class="cake-card-actions">
+      <a href="{% url 'cake_detail' slug=cake.slug %}"
+         class="btn btn-outline-secondary btn-sm cake-card-btn">
+        Details
+      </a>
+
+      {% if show_add_to_cart %}
+        {% with v=cake.default_variant %}
+          <button class="btn btn-sm hc-btn-primary cake-card-btn"
+                  type="button"
+                  data-add-to-cart="{{ cake.slug }}"
+                  data-cake-name="{{ cake.name }}"
+                  {% if v %}data-price="{{ v.price }}"{% endif %}>
+            Add to cart
+          </button>
+        {% endwith %}
+      {% endif %}
+    </div>
+  </div>
+</article>

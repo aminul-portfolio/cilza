@@ -1,0 +1,546 @@
+{% extends "cakes/base.html" %}
+{% load static %}
+{% block title %}Home | Cilza Cakes Studio{% endblock %}
+
+
+{# All styles are now in css/style.css #}
+{% block extra_head %}{% endblock %}
+
+{% block content %}
+
+<div class="home-page">
+<!-- 1️⃣ HERO SLIDER - FULL-WIDTH IMAGE BANNERS -->
+<section class="home-hero-section">
+  <div class="cake-ribbon-shell">
+    <div class="cake-ribbon-inner home-container">
+
+      <!-- Slider wrapper -->
+      <div id="cakeSlider" class="cake-hero-slider position-relative slider-wrapper">
+
+        <!-- Slider buttons -->
+        <button class="slider-btn slider-prev" aria-label="Previous slide">‹</button>
+        <button class="slider-btn slider-next" aria-label="Next slide">›</button>
+
+        <!-- Slider track -->
+        <div class="d-flex slider-track">
+
+          <!-- Slide 1 -->
+          <div class="slider-item flex-shrink-0 w-100">
+            <a href="{% url 'offers' %}" class="d-block text-decoration-none text-reset">
+              <div class="cake-hero-slide">
+                <img src="{% static 'img/slider01.jpg' %}"
+                     alt="The Brownie Collection"
+                     class="cake-hero-img">
+                <div class="cake-hero-overlay">
+                  <div class="cake-hero-title">The Brownie Collection</div>
+                  <div class="cake-hero-link">
+                    Shop Now <span>→</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="slider-item flex-shrink-0 w-100">
+            <a href="{% url 'offers' %}" class="d-block text-decoration-none text-reset">
+              <div class="cake-hero-slide">
+                <img src="{% static 'img/slider02.jpg' %}"
+                     alt="Red Velvet, Dubai Style"
+                     class="cake-hero-img">
+                <div class="cake-hero-overlay">
+                  <div class="cake-hero-title">Red Velvet, Dubai Style</div>
+                  <div class="cake-hero-link">
+                    Shop Now <span>→</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="slider-item flex-shrink-0 w-100">
+            <a href="{% url 'offers' %}" class="d-block text-decoration-none text-reset">
+              <div class="cake-hero-slide">
+                <img src="{% static 'img/slider03.jpg' %}"
+                     alt="Slice into the Season"
+                     class="cake-hero-img">
+                <div class="cake-hero-overlay">
+                  <div class="cake-hero-title">Slice into the Season</div>
+                  <div class="cake-hero-link">
+                    Shop Now <span>→</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+        </div> <!-- /.slider-track -->
+      </div>   <!-- /#cakeSlider -->
+    </div>     <!-- /.cake-ribbon-inner -->
+  </div>       <!-- /.cake-ribbon-shell -->
+</section>
+
+
+<!-- 2️⃣ SELLING QUICKLY - horizontal carousel with cake cards -->
+<section class="panel home-showcase-section position-relative">
+  <div class="container home-container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="section-title mb-0">Selling quickly</h2>
+      <a href="{% url 'cake_list' %}" class="btn btn-sm btn-outline-primary">
+        View all cakes
+      </a>
+    </div>
+
+    <!-- Scroll buttons -->
+    <button class="scroll-btn left-btn" data-target="#sellingScroll" aria-label="Previous cakes">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    <button class="scroll-btn right-btn" data-target="#sellingScroll" aria-label="Next cakes">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+
+    <!-- Horizontal scroll container -->
+    <div id="sellingScroll" class="cake-horizontal-scroll">
+      <div class="scroll-wrapper">
+
+        <!-- 1 -->
+        <div class="cake-horizontal-item">
+          <article class="cake-card card h-100">
+            <div class="cake-card-img-wrapper">
+              <img src="{% static 'img/carrot_walnut.jpg' %}"
+                   alt="Carrot Walnut Glow Cake"
+                   class="cake-card-img"
+                   loading="lazy">
+              <span class="cake-chip cake-chip-primary">Bestseller</span>
+              <span class="cake-chip cake-chip-soft">Lighter recipe</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h3 class="cake-card-title mb-1">Carrot Walnut Glow Cake</h3>
+              <p class="mb-2"><strong>From £19.90</strong></p>
+              <p class="cake-card-text text-muted small mb-3">
+                Carrot sponge, warm spice and toasted walnuts with a lighter cream cheese finish.
+              </p>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <a href="{% url 'cake_detail' slug='carrot-walnut-glow-cake' %}"
+                   class="btn btn-sm btn-outline-primary">
+                  Details
+                </a>
+                <button class="btn btn-sm hc-btn-primary"
+                        type="button"
+                        data-add-to-cart="carrot-walnut-glow-cake">
+                  Add to cart
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 2 -->
+        <div class="cake-horizontal-item">
+          <article class="cake-card card h-100">
+            <div class="cake-card-img-wrapper">
+              <img src="{% static 'img/dark_choco.jpg' %}"
+                   alt="Dark Choco Berry Indulgence"
+                   class="cake-card-img"
+                   loading="lazy">
+              <span class="cake-chip cake-chip-primary">Evenings</span>
+              <span class="cake-chip cake-chip-soft">Berry rich</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h3 class="cake-card-title mb-1">Dark Choco Berry Indulgence</h3>
+              <p class="mb-2"><strong>From £22.50</strong></p>
+              <p class="cake-card-text text-muted small mb-3">
+                Deep cocoa layers, fresh berry compote and a satin chocolate glaze.
+              </p>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <a href="{% url 'cake_detail' slug='dark-choco-berry-indulgence' %}"
+                   class="btn btn-sm btn-outline-primary">
+                  Details
+                </a>
+                <button class="btn btn-sm hc-btn-primary"
+                        type="button"
+                        data-add-to-cart="dark-choco-berry-indulgence">
+                  Add to cart
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 3 -->
+        <div class="cake-horizontal-item">
+          <article class="cake-card card h-100">
+            <div class="cake-card-img-wrapper">
+              <img src="{% static 'img/matcha_citrus.jpg' %}"
+                   alt="Matcha Citrus Loaf"
+                   class="cake-card-img"
+                   loading="lazy">
+              <span class="cake-chip cake-chip-primary">Afternoon</span>
+              <span class="cake-chip cake-chip-soft">Tea break</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h3 class="cake-card-title mb-1">Matcha Citrus Loaf</h3>
+              <p class="mb-2"><strong>From £17.40</strong></p>
+              <p class="cake-card-text text-muted small mb-3">
+                Soft matcha sponge with bright citrus glaze - light, not too sweet.
+              </p>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <a href="{% url 'cake_detail' slug='matcha-citrus-loaf' %}"
+                   class="btn btn-sm btn-outline-primary">
+                  Details
+                </a>
+                <button class="btn btn-sm hc-btn-primary"
+                        type="button"
+                        data-add-to-cart="matcha-citrus-loaf">
+                  Add to cart
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 4 -->
+        <div class="cake-horizontal-item">
+          <article class="cake-card card h-100">
+            <div class="cake-card-img-wrapper">
+              <img src="{% static 'img/banana_cloud.jpg' %}"
+                   alt="Banana Cloud Layer Cake"
+                   class="cake-card-img"
+                   loading="lazy">
+              <span class="cake-chip cake-chip-primary">Family favourite</span>
+              <span class="cake-chip cake-chip-soft">Less sugar</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h3 class="cake-card-title mb-1">Banana Cloud Layer Cake</h3>
+              <p class="mb-2"><strong>From £18.90</strong></p>
+              <p class="cake-card-text text-muted small mb-3">
+                Ripe banana sponge, light vanilla cream and a soft caramel drizzle.
+              </p>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <a href="{% url 'cake_detail' slug='banana-cloud-layer-cake' %}"
+                   class="btn btn-sm btn-outline-primary">
+                  Details
+                </a>
+                <button class="btn btn-sm hc-btn-primary"
+                        type="button"
+                        data-add-to-cart="banana-cloud-layer-cake">
+                  Add to cart
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 5 -->
+        <div class="cake-horizontal-item">
+          <article class="cake-card card h-100">
+            <div class="cake-card-img-wrapper">
+              <img src="{% static 'img/lemon_poppy.jpg' %}"
+                   alt="Lemon Poppy Seed Sunshine Cake"
+                   class="cake-card-img"
+                   loading="lazy">
+              <span class="cake-chip cake-chip-primary">Weekend</span>
+              <span class="cake-chip cake-chip-soft">Zesty</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h3 class="cake-card-title mb-1">Lemon Poppy Seed Sunshine Cake</h3>
+              <p class="mb-2"><strong>From £19.50</strong></p>
+              <p class="cake-card-text text-muted small mb-3">
+                Bright lemon, soft crumb and a light yoghurt drizzle with poppy seeds.
+              </p>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <a href="{% url 'cake_detail' slug='lemon-poppy-seed-sunshine-cake' %}"
+                   class="btn btn-sm btn-outline-primary">
+                  Details
+                </a>
+                <button class="btn btn-sm hc-btn-primary"
+                        type="button"
+                        data-add-to-cart="lemon-poppy-seed-sunshine-cake">
+                  Add to cart
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </div> <!-- /.scroll-wrapper -->
+    </div>   <!-- /#sellingScroll -->
+  </div>
+</section>
+
+
+<!-- 3️⃣ WHAT ARE YOU LOOKING FOR? - category carousel -->
+<section class="panel home-showcase-section position-relative">
+  <div class="container home-container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="section-title mb-0">What are you looking for?</h2>
+      <a href="{% url 'cake_list' %}" class="btn btn-sm btn-outline-primary">
+        Browse all designs
+      </a>
+    </div>
+
+    <!-- Scroll buttons -->
+    <button class="scroll-btn left-btn" data-target="#categoryScroll" aria-label="Previous categories">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    <button class="scroll-btn right-btn" data-target="#categoryScroll" aria-label="Next categories">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+
+    <!-- Horizontal scroll container -->
+    <div id="categoryScroll" class="cake-horizontal-scroll">
+      <div class="scroll-wrapper">
+
+        <div class="cake-horizontal-item">
+          <article class="category-card card h-100">
+            <a href="{% url 'cake_list' %}" class="text-decoration-none text-reset">
+              <div class="cake-card-img-wrapper">
+                <img src="{% static 'img/carrot_walnut.jpg' %}"
+                     alt="Birthday Zone"
+                     class="cake-card-img"
+                     loading="lazy">
+              </div>
+              <div class="card-body text-center">
+                <h3 class="category-title mb-1">Birthday Zone</h3>
+                <p class="text-muted small mb-0">
+                  Candles, messages and milestone-ready designs.
+                </p>
+              </div>
+            </a>
+          </article>
+        </div>
+
+        <div class="cake-horizontal-item">
+          <article class="category-card card h-100">
+            <a href="{% url 'cake_list' %}" class="text-decoration-none text-reset">
+              <div class="cake-card-img-wrapper">
+                <img src="{% static 'img/banana_cloud.jpg' %}"
+                     alt="Kids Collection"
+                     class="cake-card-img"
+                     loading="lazy">
+              </div>
+              <div class="card-body text-center">
+                <h3 class="category-title mb-1">Kids Collection</h3>
+                <p class="text-muted small mb-0">
+                  Fun shapes, colours and lighter creams for little ones.
+                </p>
+              </div>
+            </a>
+          </article>
+        </div>
+
+        <div class="cake-horizontal-item">
+          <article class="category-card card h-100">
+            <a href="{% url 'cake_list' %}" class="text-decoration-none text-reset">
+              <div class="cake-card-img-wrapper">
+                <img src="{% static 'img/dark_choco.jpg' %}"
+                     alt="Photo Cakes"
+                     class="cake-card-img"
+                     loading="lazy">
+              </div>
+              <div class="card-body text-center">
+                <h3 class="category-title mb-1">Photo Cakes</h3>
+                <p class="text-muted small mb-0">
+                  Your favourite picture, printed on a lighter base.
+                </p>
+              </div>
+            </a>
+          </article>
+        </div>
+
+        <div class="cake-horizontal-item">
+          <article class="category-card card h-100">
+            <a href="{% url 'cake_list' %}" class="text-decoration-none text-reset">
+              <div class="cake-card-img-wrapper">
+                <img src="{% static 'img/lemon_poppy.jpg' %}"
+                     alt="Vintage Cakes"
+                     class="cake-card-img"
+                     loading="lazy">
+              </div>
+              <div class="card-body text-center">
+                <h3 class="category-title mb-1">Vintage Cakes</h3>
+                <p class="text-muted small mb-0">
+                  Piped borders, soft pastels and classic silhouettes.
+                </p>
+              </div>
+            </a>
+          </article>
+        </div>
+
+        <div class="cake-horizontal-item">
+          <article class="category-card card h-100">
+            <a href="{% url 'cake_list' %}" class="text-decoration-none text-reset">
+              <div class="cake-card-img-wrapper">
+                <img src="{% static 'img/dark_choco.jpg' %}"
+                     alt="Chocolate Collection"
+                     class="cake-card-img"
+                     loading="lazy">
+              </div>
+              <div class="card-body text-center">
+                <h3 class="category-title mb-1">Chocolate Collection</h3>
+                <p class="text-muted small mb-0">
+                  From dark and rich to airy mousse layers.
+                </p>
+              </div>
+            </a>
+          </article>
+        </div>
+
+        <div class="cake-horizontal-item">
+          <article class="category-card card h-100">
+            <a href="{% url 'cake_list' %}" class="text-decoration-none text-reset">
+              <div class="cake-card-img-wrapper">
+                <img src="{% static 'img/matcha_citrus.jpg' %}"
+                     alt="Tiramisu Collection"
+                     class="cake-card-img"
+                     loading="lazy">
+              </div>
+              <div class="card-body text-center">
+                <h3 class="category-title mb-1">Tiramisu Collection</h3>
+                <p class="text-muted small mb-0">
+                  Coffee-soaked layers and feather-light mascarpone.
+                </p>
+              </div>
+            </a>
+          </article>
+        </div>
+
+        <div class="cake-horizontal-item">
+          <article class="category-card card h-100">
+            <a href="{% url 'cake_list' %}" class="text-decoration-none text-reset">
+              <div class="cake-card-img-wrapper">
+                <img src="{% static 'img/carrot_walnut.jpg' %}"
+                     alt="Brownie Collection"
+                     class="cake-card-img"
+                     loading="lazy">
+              </div>
+              <div class="card-body text-center">
+                <h3 class="category-title mb-1">Brownie Collection</h3>
+                <p class="text-muted small mb-0">
+                  Fudgy, crackly-topped and perfect for sharing.
+                </p>
+              </div>
+            </a>
+          </article>
+        </div>
+
+        <div class="cake-horizontal-item">
+          <article class="category-card card h-100">
+            <a href="{% url 'cake_list' %}" class="text-decoration-none text-reset">
+              <div class="cake-card-img-wrapper">
+                <img src="{% static 'img/lemon_poppy.jpg' %}"
+                     alt="Number Cakes"
+                     class="cake-card-img"
+                     loading="lazy">
+              </div>
+              <div class="card-body text-center">
+                <h3 class="category-title mb-1">Number Cakes</h3>
+                <p class="text-muted small mb-0">
+                  Mark the big numbers with layered digits and toppings.
+                </p>
+              </div>
+            </a>
+          </article>
+        </div>
+
+      </div> <!-- /.scroll-wrapper -->
+    </div>   <!-- /#categoryScroll -->
+  </div>
+</section>
+
+
+<!-- 4️⃣ OUR PROMISE - feature band -->
+<section class="promise-section py-5">
+  <div class="container promise-container home-container">
+    <div class="row align-items-center g-4">
+
+      <!-- Left: main message -->
+      <div class="col-lg-6 text-center text-lg-start">
+        <p class="promise-pretitle">Our Promise</p>
+        <h2 class="promise-title">
+          Cakes that feel as good as they look.
+        </h2>
+        <p class="promise-text">
+          Every morning our bakers switch on the ovens and whisk, fold and pipe
+          in small batches - never on an industrial line. We choose real ingredients,
+          lighter recipes and colours that glow without feeling heavy.
+        </p>
+        <p class="promise-text promise-text-secondary">
+          From quiet tea breaks to big milestone parties, every slice should feel
+          a little bit special. Add a hand-piped message, a candle or a simple topper
+          and we'll finish it with the same care we'd use for our own families.
+        </p>
+        <div class="promise-tags">
+          <span>Same-day London delivery*</span>
+          <span>Less sugar options</span>
+          <span>Vegan &amp; nut-free ranges</span>
+        </div>
+        <p class="promise-note">
+          *On selected designs - order before 2 PM.
+        </p>
+      </div>
+
+      <!-- Right: three small highlight cards -->
+      <div class="col-lg-6">
+        <div class="promise-grid">
+          <article class="promise-card">
+            <div class="promise-icon">🥕</div>
+            <h3 class="promise-card-title">Real Ingredients</h3>
+            <p class="promise-card-text">
+              Fruit, nuts, good cocoa and proper dairy where it matters.
+              No plastic colours, no “mystery” fillings.
+            </p>
+          </article>
+
+          <article class="promise-card">
+            <div class="promise-icon">🌿</div>
+            <h3 class="promise-card-title">Lighter Recipes</h3>
+            <p class="promise-card-text">
+              Balanced sponges and creams so you can enjoy dessert without
+              the heavy “post-cake” feeling.
+            </p>
+          </article>
+
+          <article class="promise-card">
+            <div class="promise-icon">🎉</div>
+            <h3 class="promise-card-title">Finished by Hand</h3>
+            <p class="promise-card-text">
+              Hand-piped borders, personalised messages and final checks
+              before every cake leaves our kitchen.
+            </p>
+          </article>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script>
+  // Horizontal scroll buttons (CineScope-style)
+  document.addEventListener("DOMContentLoaded", () => {
+    const scrollAmount = 300;
+
+    document.querySelectorAll(".scroll-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        const targetId = button.getAttribute("data-target");
+        const scrollContainer = document.querySelector(targetId);
+        if (!scrollContainer) return;
+
+        const direction = button.classList.contains("right-btn") ? 1 : -1;
+        scrollContainer.scrollBy({
+          left: direction * scrollAmount,
+          behavior: "smooth",
+        });
+      });
+    });
+  });
+</script>
+{% endblock %}

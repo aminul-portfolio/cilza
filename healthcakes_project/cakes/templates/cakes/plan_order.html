@@ -1,0 +1,72 @@
+{% extends "cakes/base.html" %}
+
+{% block title %}Plan an Order | Cilza Cakes Studio{% endblock %}
+
+{% block content %}
+<section class="page-shell py-4">
+  <div class="container page-container">
+    <header class="page-intro text-center mb-4">
+      <p class="promise-pretitle">Order support</p>
+      <h1 class="section-title mb-2">Plan an order</h1>
+      <p class="page-intro-text text-muted mb-0">
+        Share your date, servings, and style preferences and our team will help you choose the right cake.
+      </p>
+    </header>
+
+    <div class="content-card form-card">
+      <form class="row g-3 needs-validation form-grid" novalidate>
+        <div class="col-md-6">
+          <label class="form-label form-label-premium" for="order-name">Full name <span class="text-danger" aria-hidden="true">*</span></label>
+          <input class="form-control form-control-premium" id="order-name" name="name" required>
+          <div class="invalid-feedback">Please enter your full name.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label form-label-premium" for="order-email">Email <span class="text-danger" aria-hidden="true">*</span></label>
+          <input class="form-control form-control-premium" id="order-email" name="email" type="email" required>
+          <div class="invalid-feedback">Please enter a valid email address.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label form-label-premium" for="order-date">Event date <span class="text-danger" aria-hidden="true">*</span></label>
+          <input class="form-control form-control-premium" id="order-date" name="event_date" type="date" required>
+          <div class="invalid-feedback">Please choose an event date.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label form-label-premium" for="order-servings">Approximate servings <span class="text-danger" aria-hidden="true">*</span></label>
+          <input class="form-control form-control-premium" id="order-servings" name="servings" type="number" min="1" required>
+          <div class="invalid-feedback">Please enter estimated servings.</div>
+        </div>
+        <div class="col-12">
+          <label class="form-label form-label-premium" for="order-notes">Order notes <span class="text-danger" aria-hidden="true">*</span></label>
+          <textarea class="form-control form-control-premium" id="order-notes" name="notes" rows="4" required></textarea>
+          <div class="invalid-feedback">Please add a short description of your request.</div>
+        </div>
+        <div class="col-12 form-actions">
+          <button class="btn hc-btn-primary form-submit-btn" type="submit">Submit request</button>
+          <small class="form-help">Demo form: submissions are not persisted in this build.</small>
+        </div>
+        <div class="col-12">
+          <small class="form-help">We only use your details to respond to this order planning request.</small>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const forms = document.querySelectorAll(".needs-validation");
+    forms.forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add("was-validated");
+      });
+    });
+  });
+</script>
+{% endblock %}

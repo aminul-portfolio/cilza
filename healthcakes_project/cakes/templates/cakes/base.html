@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Cilza Cakes Studio{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Basic SEO -->
+  <meta name="description" content="Cilza Cakes Studio - lighter, beautiful cakes with real ingredients, perfect for every celebration.">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Poppins font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+  <!-- Global site CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+  <!-- Skip link for accessibility -->
+  <a href="#main-content" class="visually-hidden-focusable">
+    Skip to main content
+  </a>
+
+  <div class="page-wrapper d-flex flex-column min-vh-100">
+
+    <!-- 🌈 HEADER (top strip + main navbar) -->
+    <header class="hc-header border-bottom">
+      <nav class="navbar navbar-expand-lg hc-navbar" aria-label="Primary navigation">
+        <div class="container site-container nav-shell">
+          <!-- Brand -->
+          <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+            <span class="hc-brand-mark">🍰</span>
+            <span class="hc-brand-text">
+              cilza <span>cakes studio</span>
+            </span>
+          </a>
+
+          <!-- Navbar toggler (mobile) -->
+          <button class="navbar-toggler hc-navbar-toggler" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#mainNavbar" aria-controls="mainNavbar"
+                  aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Links -->
+          <div class="collapse navbar-collapse hc-navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link hc-nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+                   href="{% url 'home' %}">
+                  Home
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link hc-nav-link {% if request.resolver_match.url_name == 'cake_list' %}active{% endif %}"
+                   href="{% url 'cake_list' %}">
+                  Cakes
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link hc-nav-link {% if request.resolver_match.url_name == 'welcome' %}active{% endif %}"
+                   href="{% url 'welcome' %}">
+                  Occasions
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link hc-nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+                   href="{% url 'about' %}">
+                  About
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link hc-nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+                   href="{% url 'contact' %}">
+                  Contact
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link hc-nav-link {% if request.resolver_match.url_name == 'cart' %}active{% endif %}"
+                   href="{% url 'cart' %}">
+                  Cart <span class="hc-cart-badge ms-1" id="cart-total">0</span>
+                </a>
+              </li>
+            </ul>
+
+            <!-- Right side actions -->
+            <div class="d-flex align-items-center gap-2 ms-lg-3 hc-nav-actions">
+              <a href="{% url 'plan_order' %}" class="btn hc-btn-primary nav-cta {% if request.resolver_match.url_name == 'plan_order' %}active{% endif %}">
+                Design Your Dream Cake
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main content (pages control their own containers) -->
+    <main id="main-content" class="page-main flex-grow-1">
+      {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="hc-footer mt-5 pt-4 pb-3">
+      <div class="container site-container">
+
+        <div class="row gy-4 hc-footer-top">
+          <!-- Brand / address -->
+          <div class="col-md-4">
+            <h5 class="hc-footer-brand">cilza <span>cakes studio</span></h5>
+            <p class="mb-1">500 Happiness Street, London UK HC 234</p>
+            <p class="mb-0">+44 1234 567890 • hello@cilzacakesstudio.com</p>
+          </div>
+
+          <!-- Helpful links -->
+          <div class="col-md-4">
+            <h6 class="hc-footer-heading">Helpful links</h6>
+            <ul class="list-unstyled mb-0 hc-footer-links">
+              <li><a href="{% url 'plan_order' %}" class="text-decoration-none">Delivery &amp; Pickup</a></li>
+              <li><a href="{% url 'contact' %}" class="text-decoration-none">Allergens</a></li>
+              <li><a href="{% url 'privacy' %}" class="text-decoration-none">Refund Policy</a></li>
+            </ul>
+          </div>
+
+          <!-- Newsletter + social -->
+          <div class="col-md-4">
+            <h6 class="hc-footer-heading">Stay in touch</h6>
+            <form class="d-flex flex-column flex-sm-row gap-2 mb-3 hc-footer-form form-grid-inline" action="" method="get">
+              <label for="footer-newsletter-email" class="visually-hidden">Email address</label>
+              <input id="footer-newsletter-email" name="newsletter_email" type="email" class="form-control form-control-sm form-control-premium" placeholder="Email address" required>
+              <button class="btn hc-btn-outline btn-sm" type="submit">Join</button>
+            </form>
+            <p class="small text-muted mb-2">We only use your details to share bakery updates.</p>
+
+            <div class="hc-footer-social">
+              <span class="hc-footer-social-label">Follow us</span>
+              <div class="hc-footer-social-icons">
+                <a href="{% url 'home' %}" aria-label="Follow on Instagram">📸</a>
+                <a href="{% url 'home' %}" aria-label="Follow on Facebook">📘</a>
+                <a href="{% url 'home' %}" aria-label="Follow on TikTok">🎵</a>
+                <a href="{% url 'home' %}" aria-label="Watch on YouTube">▶️</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="hc-footer-divider">
+
+        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 hc-footer-bottom">
+          <div class="small">© 2025 Cilza Cakes Studio. All rights reserved.</div>
+          <div class="small hc-footer-mini-links">
+            <a href="{% url 'privacy' %}" class="text-decoration-none">Privacy</a>
+            <span>•</span>
+            <a href="{% url 'plan_order' %}" class="text-decoration-none">Terms</a>
+            <span>•</span>
+            <a href="{% url 'privacy' %}" class="text-decoration-none">Cookies</a>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Bootstrap + your JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'js/navbar.js' %}"></script>
+  <script src="{% static 'js/cake_slider.js' %}"></script>
+  <script src="{% static 'js/cart.js' %}"></script>
+  <script src="{% static 'js/cake_categories.js' %}"></script>
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
